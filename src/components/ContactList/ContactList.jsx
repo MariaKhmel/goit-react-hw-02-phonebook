@@ -7,10 +7,16 @@ export class ContactList extends Component{
     }
     
     render() {
-
+        const {contactlist} = this.props;
         return (
-           <>
-
+        <>
+                <ul>
+                    {contactlist.map((contact) => {
+                        <li>
+                         {contact}
+                     </li>
+                 })}
+</ul>
         </>
         )  
     }

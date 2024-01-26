@@ -1,29 +1,42 @@
 import { Component } from "react";
+import { nanoid } from 'nanoid'
 
 export class ContactForm extends Component{
 
     state = {
-    nameInputValue:''
+        id:'',
+        name: '',
+    
     }
 
-     handleNameInputChange = (e) => {
-         this.setState({nameInputValue:e.currentTarget.value})
+    handleNameInputChange = (e) => {
+
+        this.setState({
+            id : nanoid(),
+            name: e.currentTarget.value
+        })
         }
-
-    addContact
+  
+    handleFormSubmit = (e) => {
+     e.preventDefault();
+        this.props.handleFormChange(this.state)
+        this.setState({
+            id : '',
+            name: '',
+        })
+        }
     
+
+
     render() {
-      
-
-
-        return (
+  return (
            <>
-                <form onSubmit={this.addContact}>
+                <form onSubmit={this.handleFormSubmit}>
                     <label> Name
 <input
   type="text"
   name="name"
-  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+//   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan."
   required
   value={this.state.nameInputValue}

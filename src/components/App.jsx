@@ -10,18 +10,27 @@ state = {
   name: ''
 }
 
-  handleFormChange = (data) => (
-    console.log(data)
+  handleFormChange = (data) => {
+    this.setState(prevstate => {
+    const newContactsList = [...prevstate.contacts,data];
+      return {
+        contacts: newContactsList,
+  
+      }
+    })
+  }
+ 
 
-  )
+ 
 
   render() {
    
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm  />
-        <ContactList />
+        <ContactForm handleFormChange={this.handleFormChange} />
+        <h2>Contacts</h2>
+        <ContactList contactlist={this.state.contacts} />
       </div>
     );
   }
