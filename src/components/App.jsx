@@ -1,36 +1,69 @@
 import { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import {ContactList} from './ContactList/ContactList'
-
+import {Filter} from './Filter/Filter'
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
 
 state = {
-  contacts: [],
-  name: ''
+contacts: [],
+filter: '',
 }
 
-  handleFormChange = (data) => {
+handleFormChange = (data) => {
+    const newContact = {
+      id: nanoid(),
+      ...data,
+  }
+  const newContactName = data.name;
+  if (this.isContactinList(newContactName)) {
+    alert(`${newContactName} is already in contacts.`)
+  }
     this.setState(prevstate => {
-    const newContactsList = [...prevstate.contacts,data];
+    const newContactsList = [...prevstate.contacts,newContact];
       return {
         contacts: newContactsList,
-  
       }
     })
   }
  
-
+  handleFilterChange = e => {
+    const { name, value } = e.currentTarget;
+    this.setState({
+     [name]:value,
+   })
+}
  
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    const lowercaseFilter = filter.toLowerCase();
+    return contacts.filter(contact => (
+      contact.name.toLowerCase().includes(lowercaseFilter)
+    ))
+    }
+  
+  isContactinList = (newName) => {
+    const { contacts } = this.state;
+    const lowercaseName = newName.toLowerCase();
+    return contacts.find(({name})=>name.toLowerCase()===newName )
+  }
+  
+  deleteContact = e => {
+  console.log(e)
+}
 
-  render() {
-   
+  render(){
+    const filteredContacts = this.getFilteredContacts();
+      this.isContactinList('tom')
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm handleFormChange={this.handleFormChange} />
+        <Filter handleFilterChange={this.handleFilterChange}
+          filter={this.state.filter} />
         <h2>Contacts</h2>
-        <ContactList contactlist={this.state.contacts} />
+        <ContactList contactlist={filteredContacts} onClick={this.deleteContact} />
       </div>
     );
   }
