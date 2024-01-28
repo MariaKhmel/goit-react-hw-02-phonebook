@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
-import {ContactList} from './ContactList/ContactList'
+import {ContactsList} from './ContactsList/ContactsList'
 import {Filter} from './Filter/Filter'
 import { nanoid } from 'nanoid';
 
@@ -19,6 +19,7 @@ handleFormChange = (data) => {
   const newContactName = data.name;
   if (this.isContactinList(newContactName)) {
     alert(`${newContactName} is already in contacts.`)
+    return; 
   }
     this.setState(prevstate => {
     const newContactsList = [...prevstate.contacts,newContact];
@@ -49,8 +50,10 @@ handleFormChange = (data) => {
     return contacts.find(({name})=>name.toLowerCase()===newName )
   }
   
-  deleteContact = e => {
-  console.log(e)
+  deleteContact = id => {
+    this.setState(prevstate => ({
+      contacts:prevstate.contacts.filter(contact=> contact.id !==id)
+    }))
 }
 
   render(){
@@ -63,7 +66,7 @@ handleFormChange = (data) => {
         <Filter handleFilterChange={this.handleFilterChange}
           filter={this.state.filter} />
         <h2>Contacts</h2>
-        <ContactList contactlist={filteredContacts} onClick={this.deleteContact} />
+        <ContactsList contactlist={filteredContacts} onClick={this.deleteContact} />
       </div>
     );
   }
