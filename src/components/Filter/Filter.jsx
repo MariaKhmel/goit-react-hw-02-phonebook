@@ -7,9 +7,11 @@ export class Filter extends Component {
         return (
         
 
-      <div style={{marginTop:20}}>
-            Find contacts by name
-            <br/>
+          <div style={{ marginTop: 20 }}>
+            <p style={{paddingBottom:'5px'}}>
+                Find contacts by name
+            </p>
+            {/* <br/> */}
             <input
                 name='filter'
                 value={filter}

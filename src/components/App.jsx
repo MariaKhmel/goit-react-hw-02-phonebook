@@ -47,10 +47,11 @@ handleFormChange = (data) => {
   isContactinList = (newName) => {
     const { contacts } = this.state;
     const lowercaseName = newName.toLowerCase();
-    return contacts.find(({name})=>name.toLowerCase()===newName )
+    return contacts.find(({name})=>name.toLowerCase()===lowercaseName )
   }
   
   deleteContact = id => {
+   
     this.setState(prevstate => ({
       contacts:prevstate.contacts.filter(contact=> contact.id !==id)
     }))
@@ -58,9 +59,9 @@ handleFormChange = (data) => {
 
   render(){
     const filteredContacts = this.getFilteredContacts();
-      this.isContactinList('tom')
+     
     return (
-      <div>
+      <div style={{padding:'10px' }}>
         <h1>Phonebook</h1>
         <ContactForm handleFormChange={this.handleFormChange} />
         <Filter handleFilterChange={this.handleFilterChange}

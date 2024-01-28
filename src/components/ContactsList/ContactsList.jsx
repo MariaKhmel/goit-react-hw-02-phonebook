@@ -11,13 +11,6 @@ export class ContactsList extends Component{
                 <ul>
                     {contactlist.map(contact => (
                         <ContactItem key={contact.id} contact={contact} contactlist={contactlist}onClick={onClick} />
-
-                        // <li key={contact.id}>
-                            
-                        //     <p> {contact.name} : {contact.number}</p>
-                        
-                        // {contactlist.length ? <button type="button" onClick={this.props.onClick}>Delete</button> : <></>}
-                        // </li>
                     ))}
 
   
