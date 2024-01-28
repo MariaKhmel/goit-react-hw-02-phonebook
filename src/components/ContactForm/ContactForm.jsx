@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from "react";
 import {Label,Input} from './ContactForm.styled'
 
@@ -60,4 +61,8 @@ export class ContactForm extends Component{
         </>
         )  
     }
+}
+
+ContactForm.propTypes = {
+  handleFormChange:PropTypes.func.isRequired,
 }

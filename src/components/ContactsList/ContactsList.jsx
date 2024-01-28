@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 import { ContactItem } from "components/ContactItem/ContactItem";
 
 export class ContactsList extends Component{
@@ -20,4 +21,9 @@ export class ContactsList extends Component{
         )  
     }
     
+}
+
+ContactsList.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    contactlist:PropTypes.array.isRequired,
 }

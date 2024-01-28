@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 import { Contactcard } from './ContactItem.styled'
 
 
@@ -17,3 +17,9 @@ const ContactItem = ({contact, contactlist, onClick}) => {
 }
 
 export { ContactItem };
+
+ContactItem.propTypes = {
+    contact:PropTypes.object.isRequired,
+    contactlist:PropTypes.array.isRequired,
+    onClick:PropTypes.func.isRequired,
+}
