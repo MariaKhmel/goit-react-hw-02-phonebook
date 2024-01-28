@@ -1,16 +1,19 @@
 import { Component } from "react";
-import {Contactcard, DeleteButton} from'./ContactItem.styled'
+import { Contactcard } from './ContactItem.styled'
+import { Button } from "components/Button/Button";
 
 const ContactItem = ({contact, contactlist, onClick}) => {
     return (
-<Contactcard >
+       
+        <Contactcard >
 <p> {contact.name} : {contact.number}</p>
             {contactlist.length ?
-                <DeleteButton type="button" onClick={()=>onClick(contact.id)}>Delete</DeleteButton> :
+                <button type="button" onClick={()=>onClick(contact.id)}> Delete</button>:
+                // <Button  type="button" onClick={()=>onClick(contact.id)}  title='Delete'/> :
                 (null)} 
    </Contactcard>     
     )
 
 }
 
-export {ContactItem}
+export { ContactItem };
